@@ -97,7 +97,7 @@
 <tr *ngFor="let pro of getNameData">
     <td>{{pro.projectName}}</td>
     <td>{{pro.platform}}</td>
-    <td><a href="{{pro.link}}">{{pro.link}}</a></td>
+    <td><a href="{{pro.link}}" target="_blank">{{pro.link}}</a></td>
     <td>{{pro.created_on | date : 'd MMM yyyy, h:mm a'}}</td>
     <td><strong>User:</strong> {{pro.username? pro.username : '-'}} <br> <strong>Pass:</strong> {{pro.password?pro.password:'-'}}</td>
     <td > 
