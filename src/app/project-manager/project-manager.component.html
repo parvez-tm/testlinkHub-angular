@@ -1,0 +1,124 @@
+<!-- <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    
+
+    <label for="name" class="text-dark">Project Name:</label>
+    <input type="text" class="form-control form-control-sm" formControlName="projectName" required/>
+
+
+    <label for="platform" class="text-dark">Platform:</label>
+    <ng-select [items]="platform" class="custom"  bindLabel="name" bindValue="name" formControlName="platform" required>
+    </ng-select>
+
+
+    <label for="link" class="text-dark">Link:</label>
+    <input type="text" class="form-control form-control-sm" formControlName="link" required/>
+
+    <label for="created_on" class="text-dark">Upload at:</label>
+    <input type="datetime-local" class="form-control form-control-sm" formControlName="created_on"/>
+<br>
+
+
+<button type="submit" *ngIf="!getID" class="btnSub me-3" [disabled]="myForm.invalid">Submit</button>
+<button type="submit" *ngIf="getID" value="Update" class="btnSub me-3" [disabled]="myForm.invalid">Update</button>
+<button type="submit" *ngIf="getID" value="Cancel" class="btnSub" (click)="cancel()">Cancel</button>
+</form> -->
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">TestLink Hub</h4>
+      <button
+        type="button"
+        class="close btn btn-secondary"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="modal-body p-0">
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    
+
+            <label for="name" >Project Name:</label>
+            <input type="text" class="form-control form-control-sm" formControlName="projectName" required/>
+        
+        
+            <label for="platform" >Platform:</label>
+            <ng-select [items]="platform" class="custom"  bindLabel="name" bindValue="name" formControlName="platform" required>
+            </ng-select>
+        
+        
+            <label for="link" >Link:</label>
+            <input type="text" class="form-control form-control-sm" formControlName="link" required/>
+        
+            <label for="created_on" >Upload at:</label>
+            <input type="datetime-local" class="form-control form-control-sm" formControlName="created_on"/>
+
+            <label for="username" >Username:</label>
+            <input type="text" class="form-control form-control-sm" formControlName="username"/>
+
+            <label for="password" >Password:</label>
+            <input type="text" class="form-control form-control-sm" formControlName="password"/>
+        <br>
+        
+        <!-- <button type="submit" class="btnSub" [disabled]="myForm.invalid">Submit</button> -->
+        <button type="submit" *ngIf="!getID" class="btnSub me-3" [disabled]="myForm.invalid">Submit</button>
+        <button type="submit" *ngIf="getID" value="Update" class="btnSub me-3" [disabled]="myForm.invalid">Update</button>
+        <button type="submit" *ngIf="getID" value="Cancel" class="btnSub" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+
+  </ng-template>
+
+<table >
+<!-- <tr>
+    <th></th>
+    <th><input type="search" (input)="getVal($event)"/> <button type="button" class="btn btn-light" (click)="pageNum(30)">ASC</button>
+        <button type="button" class="btn btn-light" (click)="pageNum(40)">DESC</button></th>
+    <th></th>
+</tr> -->
+<tr>
+    <th>Project</th>
+    <th>Platform</th>
+    <th>Link</th>
+    <th>Uploaded on</th>
+    <th>Username/Password</th>
+    <th>Action</th>
+</tr>
+<tr>
+    <th><input type="search" class="form-control form-control-sm" (input)="getNameVal($event)"/></th>
+    <th><input type="search" class="form-control form-control-sm" (input)="getPlatformVal($event)"/></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+</tr>
+<tr *ngFor="let pro of getNameData">
+    <td>{{pro.projectName}}</td>
+    <td>{{pro.platform}}</td>
+    <td><a href="{{pro.link}}">{{pro.link}}</a></td>
+    <td>{{pro.created_on | date : 'd MMM yyyy, h:mm a'}}</td>
+    <td><strong>User:</strong> {{pro.username? pro.username : '-'}} <br> <strong>Pass:</strong> {{pro.password?pro.password:'-'}}</td>
+    <td > 
+        <!-- <button (click)="edit(pro)" type="button" class="btnSub me-2">Edit</button> -->
+        <i class="fas fa-edit me-3" (click)="edit(content,pro)"></i>
+        <i class="fa fa-trash" (click)="del(pro)" aria-hidden="true"></i>
+
+        <!-- <button  type="button" class="btnSub">Delete</button> -->
+    </td>
+</tr>
+</table>
+
+
+
+<!-- <button type="button" class="btn btn-light" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+<span>{{ currentPage }} / {{ getNameDataNumber }}</span>
+<button type="button" class="btn btn-light" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === getNameDataNumber">Next</button>
+
+<button type="button" class="btn btn-light" (click)="pageNum(10)">10</button>
+<button type="button" class="btn btn-light" (click)="pageNum(20)">20</button>
+<button type="button" class="btn btn-light" (click)="pageNum(30)">30</button>
+<button type="button" class="btn btn-light" (click)="pageNum(40)">40</button> -->
+
+<button class="circle-add" (click)="openModal(content)">+</button>
